@@ -30,8 +30,6 @@ public class EventControl implements Listener {
     public void onPlayerEat(PlayerItemConsumeEvent e) {
         if (!e.getPlayer().hasPermission("inf.item.pickup")) return;
         ItemStack itemStack = e.getPlayer().getItemInHand();
-        if (!itemStack.getItemMeta().hasCustomModelData()) return;
-        if (itemStack.getItemMeta().getCustomModelData() != 87346) return;
         e.getPlayer().setItemInHand(itemStack);
     }
 
@@ -39,8 +37,6 @@ public class EventControl implements Listener {
     public void onPlayerUse(PlayerItemDamageEvent e) {
         if (!e.getPlayer().hasPermission("inf.item.pickup")) return;
         ItemStack itemStack = e.getPlayer().getItemInHand();
-        if (!itemStack.getItemMeta().hasCustomModelData()) return;
-        if (itemStack.getItemMeta().getCustomModelData() != 87346) return;
         e.getPlayer().setItemInHand(itemStack);
     }
 
@@ -49,8 +45,6 @@ public class EventControl implements Listener {
         Player p = e.getPlayer();
         if (!e.getPlayer().hasPermission("inf.item.pickup")) return;
         ItemStack itemStack = e.getItemDrop().getItemStack();
-        if (!itemStack.getItemMeta().hasCustomModelData()) return;
-        if (itemStack.getItemMeta().getCustomModelData() != 87346) return;
         e.setCancelled(true);
         p.getWorld().dropItemNaturally(p.getLocation() , itemStack);
     }
@@ -64,6 +58,7 @@ public class EventControl implements Listener {
         Player p = e.getPlayer();
         ItemStack itemStack = e.getItem().getItemStack();
         if (p.hasPermission("inf.item.pickup")) {
+            if (itemStack.getItemMeta().hasDisplayName()) return;
             itemStack.addUnsafeEnchantment(Enchantment.ARROW_INFINITE , 1);
             ItemMeta itemMeta = itemStack.getItemMeta();
             itemMeta.setCustomModelData(87346);
