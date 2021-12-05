@@ -48,13 +48,26 @@ public class EventControl implements Listener {
     @EventHandler
     public void onItemPickup(PlayerPickupItemEvent e) {
         Player p = e.getPlayer();
+        ItemStack itemStack = e.getItem().getItemStack();
         if (p.hasPermission("inf.item.pickup")) {
-            ItemStack itemStack = e.getItem().getItemStack();
             itemStack.addUnsafeEnchantment(Enchantment.ARROW_INFINITE , 1);
             ItemMeta itemMeta = itemStack.getItemMeta();
             itemMeta.setCustomModelData(87346);
             itemStack.setItemMeta(itemMeta);
             e.getItem().setItemStack(itemStack);
+        } else {
+            if (
+                    itemStack.getItemMeta().hasEnchant(Enchantment.ARROW_INFINITE) &&
+                            itemStack.getItemMeta().hasCustomModelData() &&
+                            itemStack.getItemMeta().getCustomModelData() == 87346) {
+
+                itemStack.removeEnchantment(Enchantment.ARROW_INFINITE);
+                ItemMeta itemMeta = itemStack.getItemMeta();
+                itemMeta.setCustomModelData(null);
+                itemStack.setItemMeta(itemMeta);
+                e.getItem().setItemStack(itemStack);
+
+            }
         }
     }
 
