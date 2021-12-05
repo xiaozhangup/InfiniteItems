@@ -1,10 +1,13 @@
 package me.xiaozhangup.infiniteitems;
 
+import org.bukkit.Location;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
@@ -39,6 +42,17 @@ public class EventControl implements Listener {
         if (!itemStack.getItemMeta().hasCustomModelData()) return;
         if (itemStack.getItemMeta().getCustomModelData() != 87346) return;
         e.getPlayer().setItemInHand(itemStack);
+    }
+
+    @EventHandler
+    public void onPlayerDrop(PlayerDropItemEvent e) {
+        Player p = e.getPlayer();
+        if (!e.getPlayer().hasPermission("inf.item.pickup")) return;
+        ItemStack itemStack = e.getItemDrop().getItemStack();
+        if (!itemStack.getItemMeta().hasCustomModelData()) return;
+        if (itemStack.getItemMeta().getCustomModelData() != 87346) return;
+        e.setCancelled(true);
+        p.getWorld().dropItemNaturally(p.getLocation() , itemStack);
     }
 
 
