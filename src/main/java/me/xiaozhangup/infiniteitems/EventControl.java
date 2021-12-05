@@ -16,6 +16,7 @@ public class EventControl implements Listener {
     //event pass
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e) {
+        if (!e.getPlayer().hasPermission("inf.item.pickup")) return;
         ItemStack itemStack = e.getItemInHand();
         if (!itemStack.getItemMeta().hasCustomModelData()) return;
         if (itemStack.getItemMeta().getCustomModelData() != 87346) return;
@@ -24,6 +25,7 @@ public class EventControl implements Listener {
 
     @EventHandler
     public void onPlayerEat(PlayerItemConsumeEvent e) {
+        if (!e.getPlayer().hasPermission("inf.item.pickup")) return;
         ItemStack itemStack = e.getPlayer().getItemInHand();
         if (!itemStack.getItemMeta().hasCustomModelData()) return;
         if (itemStack.getItemMeta().getCustomModelData() != 87346) return;
@@ -32,6 +34,7 @@ public class EventControl implements Listener {
 
     @EventHandler
     public void onPlayerUse(PlayerItemDamageEvent e) {
+        if (!e.getPlayer().hasPermission("inf.item.pickup")) return;
         ItemStack itemStack = e.getPlayer().getItemInHand();
         if (!itemStack.getItemMeta().hasCustomModelData()) return;
         if (itemStack.getItemMeta().getCustomModelData() != 87346) return;
