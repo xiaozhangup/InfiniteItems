@@ -21,8 +21,6 @@ public class EventControl implements Listener {
     public void onBlockPlace(BlockPlaceEvent e) {
         if (!e.getPlayer().hasPermission("inf.item.pickup")) return;
         ItemStack itemStack = e.getItemInHand();
-        if (!itemStack.getItemMeta().hasCustomModelData()) return;
-        if (itemStack.getItemMeta().getCustomModelData() != 87346) return;
         e.getPlayer().setItemInHand(itemStack);
     }
 
