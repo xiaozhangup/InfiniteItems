@@ -54,15 +54,9 @@ public class EventControl implements Listener {
         ItemStack itemStack = e.getItem().getItemStack();
         if (p.hasPermission("inf.item.pickup")) {
             if (itemStack.getItemMeta().hasDisplayName()) return;
-            ItemMeta itemMeta = itemStack.getItemMeta();
-            itemMeta.setCustomModelData(87346);
-            itemStack.setItemMeta(itemMeta);
             e.getItem().setItemStack(itemStack);
         } else {
-            if ( itemStack.getItemMeta().hasCustomModelData() && itemStack.getItemMeta().getCustomModelData() == 87346) {
-                ItemMeta itemMeta = itemStack.getItemMeta();
-                itemMeta.setCustomModelData(null);
-                itemStack.setItemMeta(itemMeta);
+            if ( itemStack.getItemMeta().hasCustomModelData() ) {
                 e.getItem().setItemStack(itemStack);
 
             }

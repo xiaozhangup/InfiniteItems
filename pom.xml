@@ -14,7 +14,7 @@
     <groupId>me.xiaozhangup.infiniteitems</groupId>
     <artifactId>InfiniteItems</artifactId>
     <name>InfiniteItems</name>
-    <version>1.0.6</version>
+    <version>1.0.6-NoNBTChange</version>
 
     <dependencies>
         <dependency>
